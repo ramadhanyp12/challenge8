@@ -136,4 +136,23 @@ describe("#AuthenticationController", () => {
             const result = await app.handleRegister(mockRequest, mockResponse, mockNext);
         })
     })
+    describe("#authorize", () => {
+        it("", async () => {
+            const token = "ramadhan";
+            const payload = "pratamaramadhan08@gmail.com";
+
+            const mockResponse = {
+                status: jest.fn().mockReturnThis(),
+                json: jest.fn().mockReturnThis(),
+            } 
+
+            const mockNext = {}
+
+            const mockUser = new User({name, email, password})
+            const mockUserModel = {};
+            let existingUser = mockUserModel.findOne = jest.fn().mockReturnValue(mockUser)
+            const app = new AuthenticationController({userModel: mockUserModel})
+            const result = await app.handleRegister(mockRequest, mockResponse, mockNext);
+        })
+    })
 })
