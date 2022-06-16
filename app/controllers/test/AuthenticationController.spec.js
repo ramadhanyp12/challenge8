@@ -83,7 +83,7 @@ describe("#AuthenticationController", () => {
 
     describe("#encryptPassword", () => {
         it("should encrypt the password", async () => {
-            const password = "kelompok4NJAY";
+            const password = "ramadhan";
             const encrypt = bcrypt.hashSync(password, 10);
 
             const app = new AuthenticationController({jwt:jsonwebtoken, bcrypt:bcrypt})
@@ -95,7 +95,7 @@ describe("#AuthenticationController", () => {
 
     describe("#verifyPassword", () => {
         it("should verify password and encrypted one", async () => {
-            const password = "radianrasyid";
+            const password = "ramadhan";
 
             const encrypt = bcrypt.hashSync(password, 0);
 
