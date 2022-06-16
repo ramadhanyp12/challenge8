@@ -1,0 +1,37 @@
+const request = require('supertest');
+const app = require('../../app');
+const { Car } = require('../../app/models');
+
+const newCar = {
+    name: 'Tesla',
+    price: 650000,
+    size: 'SMALL',
+    image: 'https://cdn.motor1.com/images/mgl/VA0z9/s3/tesla-roadster.jpg',
+    isCurrentlyRented: false,
+};
+
+describe('GET /v1/cars/:id', () => {
+    var findCar = {};
+
+    beforeEach(async () => {
+        findCar = await Car.create(newCar);
+    });
+
+    afterEach(async () => {
+        await Car.destroy({
+            where: {
+                id: findCar.id,
+            },
+        });
+    });
+
+    it('should response with 200 as status code which means user can find car by ID', async () => {
+        await request(app)
+            .get(`/v1/cars/${findCar.id}`)
+            .set('Content-Type', 'application/json')
+            .then((res) => {
+                expect(res.statusCode).toBe(200);
+                expect(res.body).toBeDefined();
+            });
+    });
+});
